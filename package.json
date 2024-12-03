@@ -1,0 +1,11 @@
+{
+  "name": "jsdoc-documentation",
+  "version": "1.0.0",
+  "description": "Generate documentation using JSDoc",
+  "scripts": {
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.11"
+  }
+}
