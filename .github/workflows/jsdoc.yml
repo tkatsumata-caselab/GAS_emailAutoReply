@@ -1,36 +1,35 @@
-name: Generate Documentation
+name: Generate and Deploy JSDoc Documentation
 
 on:
   push:
     branches:
-      - main # ドキュメントを生成するブランチ
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # リポジトリをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Node.jsをセットアップ
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # 適切なNode.jsのバージョンを指定
+          node-version: '16'
 
-      # 依存関係をインストール
       - name: Install dependencies
         run: npm install
 
-      # JSDocを使用してドキュメントを生成
-      - name: Generate JSDoc
+      - name: Generate JSDoc Documentation
         run: npm run docs
 
-      # ドキュメントをGitHub Pagesブランチにデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
+          publish_branch: gh-pages
